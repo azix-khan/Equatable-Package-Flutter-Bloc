@@ -9,19 +9,45 @@ class EquatableTesting extends StatefulWidget {
 }
 
 class _EquatableTestingState extends State<EquatableTesting> {
+  String? personHash;
+  String? person1Hash;
+  bool? areEqual;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Person person = const Person(name: 'azix', age: 19);
-        Person person1 = const Person(name: 'azix', age: 19);
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // if the hashcode of the values is not same it shows false and if the values are same it shows true
 
-        print(person.hashCode.toString());
-        print(person1.hashCode.toString());
+          // Person person = const Person(name: 'azix', age: 19);
+          // Person person1 = const Person(name: 'azix', age: 19);
 
-        print(person == person1);
-        // print(person == person);
-      }),
+          Person person = const Person(name: 'azix khan', age: 19);
+          Person person1 = const Person(name: 'azix', age: 19);
+
+          setState(() {
+            personHash = person.hashCode.toString();
+            person1Hash = person1.hashCode.toString();
+            areEqual = person == person1;
+          });
+
+          print(personHash);
+          print(person1Hash);
+          print(areEqual);
+        },
+        child: const Icon(Icons.refresh),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Person hash code: ${personHash ?? 'Not calculated'}'),
+            Text('Person1 hash code: ${person1Hash ?? 'Not calculated'}'),
+            Text('Are they equal? ${areEqual ?? 'Not checked'}'),
+          ],
+        ),
+      ),
     );
   }
 }
